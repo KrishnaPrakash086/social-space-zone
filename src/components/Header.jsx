@@ -5,6 +5,7 @@ import { AiOutlineSearch, AiOutlineDown } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { selectUser } from "../slice/features/user/userSlice";
 
+// Dummy list of cities for demonstration purposes which should come from google without writing it manually
 const cities = [
   "Mumbai",
   "Delhi",
@@ -15,6 +16,9 @@ const cities = [
   "Kochi",
   "Udaipur",
   "Chandigarh",
+  "Hyderabad",
+  "Bengaluru",
+  // Add more cities as needed
 ];
 
 const Header = () => {
