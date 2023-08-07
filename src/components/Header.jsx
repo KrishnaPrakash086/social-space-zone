@@ -5,19 +5,24 @@ import { AiOutlineSearch, AiOutlineDown } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { selectUser } from "../slice/features/user/userSlice";
 
-// Dummy list of cities for demonstration purposes which should come from google without writing it manually
+// Dummy list of cities for demonstration purposes which will come from google if we use google places api
 const cities = [
-  "Mumbai",
-  "Delhi",
-  "Chennai",
-  // ... List of other cities ...
-  "Guwahati",
-  "Warangal",
-  "Kochi",
-  "Udaipur",
-  "Chandigarh",
-  "Hyderabad",
   "Bengaluru",
+  "Bhubaneswar",
+  "Chandigarh",
+  "Chennai",
+  "Delhi",
+  "Gurgaon",
+  "Hyderabad",
+  "Jammu",
+  "jaipur",
+  "Kolkata",
+  "Mumbai",
+  "Noida",
+  "Nagpur",
+  "Patna",
+  "Pune",
+  "Ranchi",
   // Add more cities as needed
 ];
 
