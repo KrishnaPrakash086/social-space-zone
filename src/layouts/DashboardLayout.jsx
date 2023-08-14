@@ -1,12 +1,11 @@
 import React, { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-
-import { auth } from "../firebase";
+import { useDispatch } from "react-redux";
 import { onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
+import { auth } from "../firebase";
 import SideBar from "../components/SideBar";
-import { useDispatch } from "react-redux";
 import { setUser } from "../slice/features/user/userSlice";
 
 export default function DashboardLayout({ children }) {
@@ -20,8 +19,14 @@ export default function DashboardLayout({ children }) {
         localStorage.removeItem("user_token");
         navigate("/login");
       } else {
-        // console.log("user", user);
-        dispatch(setUser({ name: user.displayName, email: user.email, uid: user.uid, username: user.email.split("@")[0] }));
+        dispatch(
+          setUser({
+            name: user.displayName,
+            email: user.email,
+            uid: user.uid,
+            username: user.email.split("@")[0],
+          })
+        );
       }
     });
   }, []);

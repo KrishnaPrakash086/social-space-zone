@@ -1,0 +1,237 @@
+.post-button {
+  border: 1px solid rgba(0,0,0,0.3);
+  margin-left: 10px;
+  padding: 8px 15px;
+  min-width: 400px;
+  color: rgba(0,0,0,0.3);
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: left;
+  background-color: #fff;
+}
+
+.post-button:hover{
+  color: #000;
+  background-color: rgba(0, 0, 0, 0.118);
+}
+
+.post-icon {
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+}
+
+.post-icons {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  margin-top: 10px;
+}
+
+.post-icon-div {
+  display: flex;
+  width: max-content;
+  justify-content: center;
+  align-items: center;
+  padding: 2px 10px;
+}
+
+.post-icon-div h6 {
+  margin: 0;
+  font-weight: 400;
+}
+
+.post-icon-div:hover {
+  cursor: pointer;
+  background-color: #9595955e;
+}
+
+.post-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.post-modalContainer {
+  max-width: 800px;
+  width: 100%;
+  margin: 75px auto;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.75);
+  border-radius: 8px;
+}
+
+.post-first-layer{
+  padding: 20px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.post-first-layer-button{
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  width: max-content;
+  padding: 5px 10px;
+  border-radius: 1.3rem;
+  background-color: #fff;
+  border: none;
+}
+
+.post-first-layer-button:hover{
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.post-first-layer-content{
+  display: flex;
+  align-items: flex-start;
+}
+
+.post-first-layer-details{
+  margin: 0 10px;
+  text-align: left;
+}
+
+.post-first-layer-details h2{
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.post-first-layer-details p{
+  margin: 0;
+}
+
+.post-first-layer-icon{
+  width: 30px;
+  height: 24px;
+  margin-top: 3px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.post-first-layer-cross-icon{
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  margin-top: 6px;
+  border-radius: 50%;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.post-first-layer-cross-icon:hover{
+  background-color: rgba(0, 0, 0, 0.1);
+  outline: 10px solid rgba(0, 0, 0, 0.1);
+}
+
+.post-second-layer{
+  padding: 0px 30px;
+  margin-bottom: 20px;
+}
+
+.post-second-layer textarea{
+  margin: 0;
+  border: none;
+  resize: none;
+  width: 100%;
+  font-size: 1.3rem;
+  margin-top: 20px;
+  padding: 0 5px;
+}
+
+.post-second-layer textarea:focus{
+  outline: none;
+}
+
+.post-third-layer{
+  position: relative;
+  padding: 20px 30px;
+  text-align: left;
+}
+
+.post-third-layer img{
+  width: 24px;
+  max-height: 24px;
+}
+
+.post-emoji{
+  margin-left: 10px;
+  margin-bottom: 20px;
+  z-index: 1;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.6);
+  border-radius: 50%;
+}
+
+.post-emoji:hover{
+  outline: 10px solid rgba(0, 0, 0, 0.1);
+}
+
+.post-third-layer-container{
+  display: flex;
+  align-items: center;
+}
+
+.post-third-layer-container p, .post-last-layer p{
+  position: absolute;
+  top: 20px;
+  padding: 5px 10px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 0px 1px rgba(0,0,0,0.08) ,0px 4px 4px rgba(0,0,0,0.3);
+  background-color: #fff;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.post-third-layer-container button{
+  margin-right: 15px;
+  padding: 15px;
+  cursor: pointer;
+  border-radius: 50%;
+  border: none;
+}
+
+.post-third-layer-container button:hover{
+  box-shadow: 0px 0px 0px 1px rgba(0,0,0,0.08) ,0px 4px 4px rgba(0,0,0,0.3);
+}
+
+.post-third-layer-additional-container{
+  display: flex;
+}
+
+.post-last-layer{
+  position: relative;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  padding: 20px 30px;
+  text-align: right;
+  border-top: 1px solid #9595955e;
+}
+
+.post-btn{
+  padding: 5px 20px;
+  border-radius: 3rem;
+  color: #fff;
+  background-color: blue;
+  border: none;
+}
+
+.post-btn:hover{
+  background-color: rgb(0, 0, 201);
+}
+
+.post-schedule{
+  margin-right: 15px;
+  z-index: 1;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.6);
+  border-radius: 50%;
+}
+
+.post-schedule:hover{
+  outline: 10px solid rgba(0, 0, 0, 0.1);
+}

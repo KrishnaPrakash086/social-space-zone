@@ -1,5 +1,12 @@
 import { getAuth } from "firebase/auth";
-import { collection, doc, getDoc, getDocs, query, where } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
 import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 // import { profileData } from "../Data/profile";
@@ -7,7 +14,7 @@ import { db } from "../firebase";
 import DashboardLayout from "../layouts/DashboardLayout";
 import HeaderLayout from "../layouts/HeaderLayout";
 
-const Profile = () => {
+function Profile() {
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -30,8 +37,8 @@ const Profile = () => {
         console.log("No matching documents.");
         navigate("/social");
       } else {
+        // eslint-disable-next-line no-shadow
         docSnap.forEach((doc) => {
-          console.log(doc.id, "=>", doc.data());
           setProfileData(doc.data());
         });
       }
@@ -41,16 +48,23 @@ const Profile = () => {
 
   return (
     <DashboardLayout>
-      <div className="container pt-5" style={{ minHeight: "calc(100vh - 51px)" }}>
+      <div
+        className="container pt-5"
+        style={{ minHeight: "calc(100vh - 51px)" }}
+      >
         <div className="row mt-5">
           <div className="col-md-4 text-center align-self-center">
             <img
               src={profileData.image}
               className="img-fluid rounded-circle"
-              style={{ height: "200px", width: "200px", objectFit: "cover" }}
+              style={{
+                height: "200px",
+                width: "200px",
+                objectFit: "cover",
+              }}
               width={100}
               height={100}
-              alt="Profile Picture"
+              alt="profile-pic"
             />
           </div>
           <div className="col-md-8">
@@ -65,6 +79,6 @@ const Profile = () => {
       </div>
     </DashboardLayout>
   );
-};
+}
 
 export default Profile;

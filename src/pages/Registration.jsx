@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import { validateEmail, validatePassword } from "../utils/validation";
+import { Link } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { addDoc, collection } from "firebase/firestore";
 
+import { validateEmail, validatePassword } from "../utils/validation";
+import { auth, db } from "../firebase";
 import "./Login.css";
-import { auth } from "../firebase";
 
-const Registration = () => {
-  const [user, setUser] = useState({
+function Registration() {
+  const [userDetails, setUserDetails] = useState({
     firstName: "",
     lastName: "",
     email: "",
@@ -15,16 +17,22 @@ const Registration = () => {
     confirmPassword: "",
   });
   const [image, setImage] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setUser({ ...user, [name]: value });
+    setUserDetails({ ...userDetails, [name]: value });
   };
+
+  const handlePasswordShows = () => setShowPassword((prevValue) => !prevValue);
+  const handleConfirmPasswordShows = () =>
+    setShowConfirmPassword((prevValue) => !prevValue);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    if (file.size > 1024 * 1024) {
-      alert("Image size should be less than 1 MB");
+    if (file.size > 1024 * 1024 * 1024) {
+      alert("Image size should be less than 2 MB");
     } else if (!["image/jpeg", "image/png", "image/jpg"].includes(file.type)) {
       alert("Invalid file format. Only JPEG, PNG, and JPG are allowed.");
     } else {
@@ -35,14 +43,14 @@ const Registration = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const { firstName, lastName, email, city, password, confirmPassword } =
-      user;
+      userDetails;
     if (
       !firstName ||
+      !lastName ||
       !email ||
       !city ||
       !password ||
-      !confirmPassword ||
-      !image
+      !confirmPassword
     ) {
       alert("All fields are required");
     } else if (!validateEmail(email)) {
@@ -55,14 +63,23 @@ const Registration = () => {
       alert("Passwords do not match");
     } else {
       alert("Success");
-      console.log(user);
       createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          const user = userCredential.user;
+        .then(async (userCredential) => {
+          // eslint-disable-next-line no-shadow
+          const { user } = userCredential;
+          console.log(user);
+          await addDoc(collection(db, "users"), {
+            firstName,
+            lastName,
+            email,
+            city,
+            uid: user.uid,
+          });
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
+          console.log(errorCode, errorMessage);
         });
     }
   };
@@ -113,23 +130,52 @@ const Registration = () => {
           </div>
           <div className="mb-3">
             <label>Password</label>
-            <input
-              type="password"
-              className="form-control"
-              name="password"
-              onChange={handleChange}
-              placeholder="Strong password recommended"
-            />
+            <div className="position-relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                className="form-control"
+                name="password"
+                onChange={handleChange}
+                placeholder="Strong password recommended"
+              />
+              <div
+                className="position-absolute top-50 translate-middle-y"
+                style={{ right: "12px" }}
+                onClick={handlePasswordShows}
+                aria-hidden="true"
+              >
+                {showPassword ? (
+                  <i className="fa fa-eye" />
+                ) : (
+                  <i className="fas fa-eye-slash" />
+                )}
+              </div>
+            </div>
           </div>
           <div className="mb-3">
             <label>Confirm Password</label>
-            <input
-              type="password"
-              className="form-control"
-              name="confirmPassword"
-              onChange={handleChange}
-              placeholder="Confirm password"
-            />
+            <div className="position-relative">
+              <input
+                type={showConfirmPassword ? "text" : "password"}
+                className="form-control"
+                name="confirmPassword"
+                onChange={handleChange}
+                placeholder="Confirm password"
+              />
+
+              <div
+                className="position-absolute top-50 translate-middle-y"
+                style={{ right: "12px" }}
+                onClick={handleConfirmPasswordShows}
+                aria-hidden="true"
+              >
+                {showConfirmPassword ? (
+                  <i className="fa fa-eye" />
+                ) : (
+                  <i className="fas fa-eye-slash" />
+                )}
+              </div>
+            </div>
           </div>
           <div className="mb-3">
             <label>Upload Image (max size 1MB)</label>
@@ -153,6 +199,6 @@ const Registration = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Registration;

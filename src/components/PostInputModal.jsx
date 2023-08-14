@@ -1,31 +1,56 @@
 import React, { useState } from "react";
 import { addDoc, collection } from "firebase/firestore";
-import { db } from "../firebase";
 import { Button, Modal } from "react-bootstrap";
+import { db } from "../firebase";
 
-const PostInputModal = ({ show, setShow }) => {
-  const [postData, setPostData] = useState({ event_name: "", description: "", location: "", date: "", image_url: "" });
+function PostInputModal({ show, setShow }) {
+  const [postData, setPostData] = useState({
+    event_name: "",
+    description: "",
+    location: "",
+    date: "",
+    image_url: "",
+  });
 
   const onHandleChange = (e) => {
     setPostData({ ...postData, [e.target.name]: e.target.value });
   };
   const resetData = () => {
-    setPostData({ event_name: "", description: "", location: "", date: "", image_url: "" });
+    setPostData({
+      event_name: "",
+      description: "",
+      location: "",
+      date: "",
+      image_url: "",
+    });
   };
+
+  const handleClose = () => setShow(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (
+      postData.event_name.trim() === "" ||
+      postData.description.trim() === "" ||
+      postData.location.trim() === "" ||
+      postData.date.trim() === "" ||
+      postData.image_url.trim() === ""
+    ) {
+      alert("Please fill in all fields");
+      return;
+    }
     console.log(postData);
     await addDoc(collection(db, "posts"), {
       user: {
         id: 1,
         name: "Nayak 2",
         username: "krishna_nayak-2",
-        image: "https://t4.ftcdn.net/jpg/03/64/21/11/360_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg",
+        image:
+          "https://t4.ftcdn.net/jpg/03/64/21/11/360_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg",
         location: "bhubneswar",
       },
 
-      likes: 1,
+      likes: [],
       comments: 6,
       shares: 2,
       event: {
@@ -36,18 +61,16 @@ const PostInputModal = ({ show, setShow }) => {
           "Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde sunt sed sapiente deserunt! Accusantium, magni blanditiis ex odio, fugiat repellat voluptates voluptatum voluptatem, inventore praesentium distinctio soluta officiis a pariatur!",
         date: "2021-10-11",
         time: "10:00",
-        image: "https://t4.ftcdn.net/jpg/01/64/83/47/360_F_164834714_2UMLp8c0bszO8T3kpuKjTPBNcmVO8ad0.jpg",
+        image:
+          "https://t4.ftcdn.net/jpg/01/64/83/47/360_F_164834714_2UMLp8c0bszO8T3kpuKjTPBNcmVO8ad0.jpg",
       },
       ...postData,
     });
     resetData();
     handleClose();
     window.location.reload();
-
     alert("Post Created!");
   };
-
-  const handleClose = () => setShow(false);
 
   return (
     <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
@@ -61,13 +84,28 @@ const PostInputModal = ({ show, setShow }) => {
               <label htmlFor="grid-first-name" className="form-control-label">
                 Event Name
               </label>
-              <input onChange={onHandleChange} name="event_name" value={postData.event_name} type="text" className="form-control" id="grid-first-name" placeholder="Jane" />
+              <input
+                onChange={onHandleChange}
+                name="event_name"
+                value={postData.event_name}
+                type="text"
+                className="form-control"
+                id="grid-first-name"
+                placeholder="Jane"
+              />
             </div>
             <div className="col-12">
               <label htmlFor="grid-last-name" className="form-control-label">
                 Description
               </label>
-              <textarea onChange={onHandleChange} name="description" value={postData.description} className="form-control" id="grid-last-name" placeholder="..."></textarea>
+              <textarea
+                onChange={onHandleChange}
+                name="description"
+                value={postData.description}
+                className="form-control"
+                id="grid-last-name"
+                placeholder="..."
+              />
             </div>
           </div>
           <div className="row">
@@ -75,13 +113,29 @@ const PostInputModal = ({ show, setShow }) => {
               <label htmlFor="grid-city" className="form-control-label">
                 City
               </label>
-              <input onChange={onHandleChange} name="location" value={postData.location} type="text" className="form-control" id="grid-city" placeholder="Albuquerque" />
+              <input
+                onChange={onHandleChange}
+                name="location"
+                value={postData.location}
+                type="text"
+                className="form-control"
+                id="grid-city"
+                placeholder="Albuquerque"
+              />
             </div>
             <div className="col-6">
               <label htmlFor="grid-password" className="form-control-label">
                 Date
               </label>
-              <input onChange={onHandleChange} name="date" value={postData.date} type="date" className="form-control" id="grid-date" placeholder="" />
+              <input
+                onChange={onHandleChange}
+                name="date"
+                value={postData.date}
+                type="date"
+                className="form-control"
+                id="grid-date"
+                placeholder=""
+              />
             </div>
           </div>
           <div className="row">
@@ -89,7 +143,15 @@ const PostInputModal = ({ show, setShow }) => {
               <label htmlFor="grid-city" className="form-control-label">
                 Image URL
               </label>
-              <input onChange={onHandleChange} name="image_url" value={postData.image_url} type="text" className="form-control" id="grid-url" placeholder="Albuquerque" />
+              <input
+                onChange={onHandleChange}
+                name="image_url"
+                value={postData.image_url}
+                type="text"
+                className="form-control"
+                id="grid-url"
+                placeholder="Albuquerque"
+              />
             </div>
           </div>
         </form>
@@ -104,6 +166,6 @@ const PostInputModal = ({ show, setShow }) => {
       </Modal.Footer>
     </Modal>
   );
-};
+}
 
 export default PostInputModal;

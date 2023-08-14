@@ -1,7 +1,9 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { isAuthenticated } from "./validation";
 
-export const PrivateWrapper = () => {
+function PrivateWrapper() {
   const auth = isAuthenticated();
   return auth ? <Outlet /> : <Navigate to="/login" />;
-};
+}
+
+export default PrivateWrapper;

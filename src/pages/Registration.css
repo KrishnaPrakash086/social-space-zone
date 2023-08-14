@@ -5,10 +5,11 @@
   border: 2px solid #ccc;
   border-radius: 4px;
   background-color: #f5f5f5;
-  color: #333;
+  color: #555;
 }
 
-.card-registration .select-input.form-control[readonly]:not([disabled])::placeholder {
+.card-registration
+  .select-input.form-control[readonly]:not([disabled])::placeholder {
   color: #888;
 }
 

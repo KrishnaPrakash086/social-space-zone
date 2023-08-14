@@ -25,3 +25,39 @@ body {
   object-fit: cover;
   border-radius: 100%;
 }
+.overlay {
+  position: absolute;
+  margin-top: -2.5rem;
+  margin-left: -4rem;
+  background-color: rgb(231, 232, 235);
+  border-radius: 3rem;
+  height: 3.6%;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.share {
+  margin: auto;
+  max-width: fit-content;
+  position: relative;
+  border-radius: 5%;
+  z-index: 1;
+}
+.icons {
+  margin-left: 0.3rem;
+  margin-top: 2px;
+  margin-right: 0.2rem;
+  border-radius: 50%;
+}
+.icons:hover {
+  scale: 1.2;
+}
+.share::after {
+  content: " ";
+  background-color: rgb(231, 232, 235);
+  position: absolute;
+  bottom: calc(7% - 7.5px);
+  left: 41%;
+  transform: rotate(45deg);
+  width: 8px;
+  height: 8px;
+}

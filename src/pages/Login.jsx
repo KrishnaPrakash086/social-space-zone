@@ -1,32 +1,35 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../firebase";
 import { validateEmail, validatePassword } from "../utils/validation";
 
 import "./Login.css";
 
-const Login = () => {
+function Login() {
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState({ email: "", password: "" });
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUserInfo({ ...userInfo, [name]: value });
   };
 
+  const handlePasswordShows = () => setShowPassword((prevValue) => !prevValue);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const { email, password } = userInfo;
-    //if (!validateEmail(email)) alert("Invalid email");
+    // if (!validateEmail(email)) alert("Invalid email");
 
     // if (!validatePassword(password)) alert("Invalid password");
 
     if (validateEmail(email)) {
       signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-          const user = userCredential.user;
-          console.log(user);
+          const { user } = userCredential;
+          // console.log(user);
           localStorage.setItem("user_token", user.accessToken);
           navigate("/social");
         })
@@ -60,13 +63,27 @@ const Login = () => {
           </div>
           <div className="mb-3">
             <label>Password</label>
-            <input
-              type="password"
-              className="form-control"
-              name="password"
-              placeholder="Enter password"
-              onChange={handleChange}
-            />
+            <div className="position-relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                className="form-control"
+                name="password"
+                placeholder="Enter password"
+                onChange={handleChange}
+              />
+              <div
+                className="position-absolute top-50 translate-middle-y"
+                style={{ right: "12px" }}
+                onClick={handlePasswordShows}
+                aria-hidden="true"
+              >
+                {showPassword ? (
+                  <i className="fa fa-eye" />
+                ) : (
+                  <i className="fas fa-eye-slash" />
+                )}
+              </div>
+            </div>
           </div>
           <div className="mb-3">
             <div className="custom-control custom-checkbox">
@@ -86,12 +103,16 @@ const Login = () => {
             </button>
           </div>
           <p className="forgot-password text-right">
-            Forgot <a href="#">password?</a>
+            Forgot <Link to="/login">password?</Link>
+          </p>
+
+          <p className="forgot-password text-right">
+            Create a new account <Link to="/registration">registration</Link>
           </p>
         </form>
       </div>
     </div>
   );
-};
+}
 
 export default Login;

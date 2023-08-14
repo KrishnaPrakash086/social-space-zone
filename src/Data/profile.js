@@ -1,4 +1,4 @@
-export const profileData = {
+const profileData = {
   id: 1,
   name: "John Doe",
   username: "john_doe",
@@ -9,8 +9,8 @@ export const profileData = {
   bio: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde sunt sed sapiente deserunt! Accusantium, magni blanditiis ex odio, fugiat repellat voluptates voluptatum voluptatem, inventore praesentium distinctio soluta officiis a pariatur!",
   followers: 10,
   following: 10,
-  posts: 10,
-  events: 10,
+  postsCount: 10,
+  eventsCount: 10,
   interests: ["Music", "Sports", "Movies", "Food", "Travel"],
   events: [
     {
@@ -82,3 +82,5 @@ export const profileData = {
     },
   ],
 };
+
+export default profileData;

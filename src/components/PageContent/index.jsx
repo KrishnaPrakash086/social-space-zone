@@ -1,18 +1,25 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 
 import HeaderLayout from "../../layouts/HeaderLayout";
 
 import AppRoutes from "../AppRoutes";
 import DashboardRoute from "../DashboardRoutes/DashboardRoutes";
 
-const Layout = () => (
-  <HeaderLayout>
-    <DashboardRoute />
-  </HeaderLayout>
-);
+function Layout() {
+  return (
+    <HeaderLayout>
+      <DashboardRoute />
+    </HeaderLayout>
+  );
+}
 
-const Index = () => {
+function Index() {
   return (
     <Router>
       <Routes>
@@ -22,6 +29,6 @@ const Index = () => {
       </Routes>
     </Router>
   );
-};
+}
 
 export default Index;

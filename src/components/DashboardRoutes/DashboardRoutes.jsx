@@ -1,14 +1,14 @@
 import React from "react";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 import Home from "../../pages/Home";
 import Profile from "../../pages/Profile";
 import Community from "../../pages/Community";
 import Explore from "../../pages/Explore";
 import Notification from "../../pages/Notification";
-import { PrivateWrapper } from "../../utils/PrivateWrapper";
+import PrivateWrapper from "../../utils/PrivateWrapper";
 
-const DashboardRoute = () => {
+function DashboardRoute() {
   return (
     <Routes>
       <Route element={<PrivateWrapper />}>
@@ -21,10 +21,12 @@ const DashboardRoute = () => {
       </Route>
     </Routes>
   );
-};
+}
 
 function PageNotFound() {
-  return <div style={{ minHeight: "calc(100vh - 51px)" }}>Page Not Found:404</div>;
+  return (
+    <div style={{ minHeight: "calc(100vh - 51px)" }}>Page Not Found:404</div>
+  );
 }
 
 export default DashboardRoute;
